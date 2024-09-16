@@ -12,27 +12,22 @@
 
 {% block content %}
 <section id="summary">
-    <h2>Post Title</h2>
+    <h2>{{post.title}}</h2>
+    <div >
+        {% for tag in post_tags %}
+            <span id="tags">#{{tag.caption}}</span>
+        {% endfor %}
+    </div>
     <article>
-        <img src="{% static "blog/images/mountains.jpg" %}" alt="Post Title">
-        <address>By Jawad Swed</address>
+        <img src="{% static "blog/images/"|add:post.image %}" alt={{post.title}}>
+        <address>By <a href="mailto:{{post.author.email}}">{{post.author|title}}</a></address>
         <div>
-            Last updated on <time datetime="">July 10th</time>
+            Last updated on <time datetime="">{{post.date|date:"D d M Y"}}</time>
         </div>
     </article>
 </section>
 
 <main>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, commodi optio? Magni, ipsa quaerat dolor
-        pariatur cum facere, vitae, debitis cupiditate assumenda quam nihil. Natus odit dolore harum architecto fugiat!
-    </p>
-    <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium a fugiat aspernatur voluptates iure itaque
-        quis nobis minima, porro qui ullam commodi officiis et, corrupti quibusdam aliquam enim quia tempora?
-    </p>
-    <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam, quo. Asperiores totam neque maxime aut iure, ex
-        dolor quisquam deleniti delectus. Ea temporibus sapiente quidem laborum. Magnam nisi laboriosam sequi!
-    </p>
+    {{post.content|linebreaks}}
 </main>
 {% endblock content %}
